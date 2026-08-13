@@ -15,6 +15,7 @@ export const formatResultado = (resultado) => {
     id: r.id,
     provaId: r.provaId,
     equipeId: r.equipeId,
+    //w
     // Converte a 'marca' (pontuação/tempo) para número caso ela não seja nula.
     marca: r.marca != null ? Number(r.marca) : null,
     // Se houver dados da equipe, chama a view correspondente; senão, retorna null.
