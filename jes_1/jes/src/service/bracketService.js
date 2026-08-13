@@ -131,7 +131,7 @@ export const gerarEliminatoria = (equipes, modalidadeId) => {
     partida.timeBId = timeB ? timeB.id : null;
   });
 
- export const mapa = new Map(rodadas.flat().map(p => [p.id, p]));
+ const mapa = new Map(rodadas.flat().map(p => [p.id, p]));
   resolverByesDaPrimeiraRodada(rodadas[0], mapa);
   return Array.from(mapa.values());
 };

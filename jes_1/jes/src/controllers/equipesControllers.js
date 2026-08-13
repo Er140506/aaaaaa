@@ -1,7 +1,7 @@
 import { request, response } from "express"
 import{equipeModel,partidasModel,modalidadeModel,provaModel,seriesModel,resultadoModel} from "../model/index.js" 
 
-export const ListaModalidade = async (request,response) =>{
+export const ListaEquipes= async (request,response) =>{
     try {
      
         const equipe = await equipeModel.findAll()

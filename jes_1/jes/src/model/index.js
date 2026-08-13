@@ -35,8 +35,8 @@ partidasModel.hasMany(partidasModel, { foreignKey: 'proximaPartidaId', as: 'part
 equipeModel.belongsTo(equipeModel, { foreignKey: 'combinadaDe1Id', as: 'combinadaDe1' });
 equipeModel.belongsTo(equipeModel, { foreignKey: 'combinadaDe2Id', as: 'combinadaDe2' });
 
-equipeModel.belongsTo(equipeModel, { foreignKey: 'juntar_em_id', as: 'juntarequipe' });
-equipeModel.hasMany(equipeModel, { foreignKey: 'juntar_em_id', as: 'equipesOrigem' });
+equipeModel.belongsTo(equipeModel, { foreignKey: 'fundidaEmId', as: 'juntarequipe' });
+equipeModel.hasMany(equipeModel, { foreignKey: 'fundidaEmId', as: 'equipesOrigem' });
 
 // Modalidade <-> Prova (Atletismo)
 modalidadeModel.hasMany(provaModel, { foreignKey: 'modalidadeId', as: 'provas' });

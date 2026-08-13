@@ -50,7 +50,7 @@ export const equipeModel = conexao.define(
             allowNull: true,
             field:"combinada_de_2_id"
         },
-        juntar_em_id: {
+        fundidaEmId: {
             type: DataTypes.INTEGER,
             allowNull: true,
            

@@ -1,8 +1,8 @@
 import{Router}from "express"
-import{ListaModalidade}from "../controllers/equipesControllers.js"
+import{ListaEquipes}from "../controllers/equipesControllers.js"
 
 const router = Router()
 
-router.get("/", ListaModalidade)
+router.get("/", ListaEquipes)
 
 export default router

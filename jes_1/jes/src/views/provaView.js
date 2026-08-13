@@ -3,7 +3,7 @@
  * Formata Prova e seus Resultados para a resposta da API, limpando dados do banco.
  */
 
-import { formatEquipe } from "./equipeView";
+import { formatEquipe } from "./equipesViews.js";
 
 // Formata um único resultado de uma prova específica
 export const formatResultado = (resultado) => {

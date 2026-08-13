@@ -4,7 +4,7 @@
  * Reaproveita formatEquipe para formatar os dados dos times A e B com segurança.
  */
 
-import { formatEquipe } from "./equipesViews";
+import { formatEquipe } from "./equipesViews.js";
 
 // Formata um único objeto de partida, extraindo somente o que a tela do celular vai usar.
 export const formatPartida = (partida) => {
