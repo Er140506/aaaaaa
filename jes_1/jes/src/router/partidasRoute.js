@@ -5,7 +5,7 @@ import {
     buscarPartidaPorId,
     atualizarPartida,
     //deletarPartida
-} from "../controllers/partidasControllers";
+} from "../controllers/partidasControllers.js";
 
 const router = Router()
 

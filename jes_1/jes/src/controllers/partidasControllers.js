@@ -16,7 +16,7 @@ export const cadastrarPartidas = async ( request, response ) => {
     const { modalidadeId, formato, rodada, faseNome, slot, 
         timeAId, timeBId, placarA, placarB, status, data, hora,
         local, duracao, iniciadaEm, proximaPartidaId, proximaPartidaVaga
-     }
+     } =  request.body
     
     try {
         

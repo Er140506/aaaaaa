@@ -1,8 +1,6 @@
 import express from "express"
 import cors from "cors"
-import equipesRoute from "./router/equipesRoute.js"
-import modalidadesRouter from "./router/modalidadesRouter.js"
-
+import { equipesRoute, modalidadesRouter, partidasRouter } from "./router/indexRoute.js"
 
 const app = express()
 
@@ -14,13 +12,12 @@ app.use(cors({
 
 app.use(express.json())
 
-app.use("/jes",equipesRoute)
-app.use('/modalidades',modalidadesRouter)
+app.use("/jes", equipesRoute)
+app.use('/modalidades', modalidadesRouter)
+app.use('/partidas', partidasRouter)
 
 app.use((request,response)=>{
-  
     response.status(400).json({mensagem:"Rota não encontrada"})
 })
-
 
 export default app
