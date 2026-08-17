@@ -6,6 +6,7 @@ const PORT = 3000
 
 const iniciarSever = async ()=>{
     try {
+        // await conexao.sync({force:true})
         await conexao.sync()
 
         app.listen(PORT,()=>{
