@@ -1,0 +1,18 @@
+import { Router } from "express";
+import { 
+    cadastrarPartidas, 
+    listarPartidas,
+    buscarPartidaPorId,
+    atualizarPartida,
+    //deletarPartida
+} from "../controllers/partidasControllers";
+
+const router = Router()
+
+router.get("/", listarPartidas)
+router.post("/", cadastrarPartidas)
+router.get("/:id", buscarPartidaPorId)
+router.put("/:id", atualizarPartida)
+//router.delete("/:id", deletarPartida)
+
+export default router

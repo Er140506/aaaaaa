@@ -1,6 +1,7 @@
 import express from "express"
 import cors from "cors"
 import equipesRoute from "./router/equipesRoute.js"
+import modalidadesRouter from "./router/modalidadesRouter.js"
 
 
 const app = express()
@@ -14,6 +15,7 @@ app.use(cors({
 app.use(express.json())
 
 app.use("/jes",equipesRoute)
+app.use('/modalidades',modalidadesRouter)
 
 app.use((request,response)=>{
   
