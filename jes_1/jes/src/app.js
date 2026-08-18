@@ -1,4 +1,6 @@
+
 import "dotenv/config"
+console.log("CODIGO_PROFESSOR carregado:", process.env.CODIGO_PROFESSOR)
 import express from "express"
 import cors from "cors"
 import {

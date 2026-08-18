@@ -23,5 +23,11 @@ export const usuarioModel = conexao.define(
             type: DataTypes.STRING(255),
             allowNull: false
         },
+        // "professor" tem acesso total; "aluno" só pode visualizar
+        tipo: {
+            type: DataTypes.ENUM("professor", "aluno"),
+            allowNull: false,
+            defaultValue: "aluno"
+        },
     }
 )
