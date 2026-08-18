@@ -1,3 +1,4 @@
+import "dotenv/config"
 import express from "express"
 import cors from "cors"
 import {
@@ -6,7 +7,8 @@ import {
     partidasRouter,
     seriesRoute,
     provaRoute,
-    resultadoRoute
+    resultadoRoute,
+    authRoute
 } from "./router/indexRoute.js"
 
 const app = express()
@@ -19,7 +21,8 @@ app.use(cors({
 
 app.use(express.json())
 
-app.use("/jes", equipesRoute)
+app.use("/auth", authRoute)
+app.use("/equipes", equipesRoute)
 app.use('/modalidades', modalidadesRouter)
 app.use('/partidas', partidasRouter)
 app.use('/series', seriesRoute)

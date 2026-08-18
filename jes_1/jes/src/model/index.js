@@ -4,6 +4,7 @@ import{partidasModel}from"./partidas.js"
 import{provaModel}from"./prova.js"
 import{resultadoModel}from"./resultado.js"
 import{seriesModel}from"./series.js"
+import { usuarioModel } from "./usuarioModel.js"
 
 
 
@@ -51,4 +52,4 @@ resultadoModel.belongsTo(equipeModel, { foreignKey: 'equipeId', as: 'equipe' });
 
 
 
-export {equipeModel, partidasModel ,resultadoModel ,provaModel ,seriesModel ,modalidadeModel}
+export {equipeModel, partidasModel ,resultadoModel ,provaModel ,seriesModel ,modalidadeModel, usuarioModel}
