@@ -36,9 +36,9 @@ import { permitirProfessor } from "../middlewares/permitirProfessor.js"
 
 const router = Router()
 
-router.get('/', authMiddleware, asyncHandler(listarModalidades))
-router.get('/:id', authMiddleware, asyncHandler(buscarporId))
-router.get('/:id/classificacao', authMiddleware, asyncHandler(classificacao))
+router.get('/', asyncHandler(listarModalidades))
+router.get('/:id', asyncHandler(buscarporId))
+router.get('/:id/classificacao', asyncHandler(classificacao))
 
 router.post('/', authMiddleware, permitirProfessor, asyncHandler(cadastrarModalidades))
 router.put('/:id', authMiddleware, permitirProfessor, asyncHandler(atualizarModalidades))

@@ -27,9 +27,6 @@ export const registrar = async (request, response) => {
 
         // Só vira "professor" se mandou o código secreto certo
         const tipo = (codigoProfessor && codigoProfessor === process.env.CODIGO_PROFESSOR)
-            ? "professor"
-            : "aluno"
-
         // Nunca salva a senha em texto puro - sempre criptografada
         const senhaCriptografada = await bcrypt.hash(senha, 10)
 
@@ -49,39 +46,6 @@ export const registrar = async (request, response) => {
         })
     } catch (error) {
         console.error("Erro ao registrar usuário:", error.message)
-        return tratarErro(error, response)
-    }
-}
-
-// POST /auth/entra - Autentica o usuário e devolve o token
-export const entra = async (request, response) => {
-    try {
-        const { email, senha } = request.body
-
-        if (!email || !senha) {
-            return response.status(400).json({ msg: "Informe email e senha" })
-        }
-
-        const usuario = await usuarioModel.findOne({ where: { email } })
-        if (!usuario) {
-            // Mensagem genérica de propósito, pra não indicar se o email existe ou não
-            return response.status(401).json({ msg: "Email ou senha inválidos" })
-        }
-
-        const senhaConfere = await bcrypt.compare(senha, usuario.senha)
-        if (!senhaConfere) {
-            return response.status(401).json({ msg: "Email ou senha inválidos" })
-        }
-
-        const token = gerarToken(usuario)
-
-        return response.status(200).json({
-            msg: "Login realizado com sucesso!",
-            usuario: { id: usuario.id, nome: usuario.nome, email: usuario.email, tipo: usuario.tipo },
-            token
-        })
-    } catch (error) {
-        console.error("Erro ao fazer login:", error.message)
         return tratarErro(error, response)
     }
 }

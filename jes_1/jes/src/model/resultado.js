@@ -1,10 +1,9 @@
 import { DataTypes } from "sequelize";
-import { conexao } from "../config/conexao.js"
+import { conexao } from "../config/conexao.js";
 import { equipeModel } from "./equipe.js";
 import { provaModel } from "./prova.js";
 
-
-export const resultadoModel =  conexao.define(
+export const resultadoModel = conexao.define(
     "resultado",
     {
         id: {
@@ -32,7 +31,25 @@ export const resultadoModel =  conexao.define(
         },
         marca: {
             type: DataTypes.DECIMAL(10, 2),
-            allowNull: false
-        },
+            allowNull: false,
+            validate: {
+                isDecimal: { msg: "A marca deve ser um número decimal válido." },
+                min: {
+                    args: [0.01],
+                    msg: "A marca deve ser um valor maior do que zero."
+                }
+            }
+        }
+    },
+    {
+        // 1. Índice de Unicidade Composto:
+        // Garante que uma equipe só tenha UM resultado por prova.
+        indexes: [
+            {
+                unique: true,
+                fields: ['prova_id', 'equipe_id'],
+                name: 'unique_equipe_por_prova'
+            }
+        ]
     }
-)
+);

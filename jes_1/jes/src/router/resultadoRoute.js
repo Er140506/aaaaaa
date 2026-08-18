@@ -31,7 +31,7 @@ import { permitirProfessor } from "../middlewares/permitirProfessor.js"
 
 const router = Router()
 
-router.get("/", authMiddleware, ListaResultados)
+router.get("/", ListaResultados)
 
 router.post("/", authMiddleware, permitirProfessor, CriarResultado)
 router.put("/:id", authMiddleware, permitirProfessor, AtualizarResultado)

@@ -30,8 +30,8 @@ import { permitirProfessor } from "../middlewares/permitirProfessor.js"
 
 const router = Router()
 
-router.get("/", authMiddleware, listarPartidas)
-router.get("/:id", authMiddleware, buscarPartidaPorId)
+router.get("/", listarPartidas)
+router.get("/:id", buscarPartidaPorId)
 
 router.post("/", authMiddleware, permitirProfessor, cadastrarPartidas)
 router.put("/:id", authMiddleware, permitirProfessor, atualizarPartida)
