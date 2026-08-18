@@ -1,7 +1,5 @@
 import { DataTypes } from "sequelize";
 import { conexao } from "../config/conexao.js"
-import { provaModel } from "./prova.js";
-
 
 export const seriesModel = conexao.define(
     "series",
@@ -11,29 +9,27 @@ export const seriesModel = conexao.define(
             autoIncrement: true,
             primaryKey: true
         },
-        provaId: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            field: 'prova_id',
-            references: {
-                model: provaModel,
-                key: "id"
-            }
-        },
-        equipeId: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            field: 'equipe_id',
-            references: {
-                model: "equipes",
-                key: "id"
-            }
-        },
-        marca: {
-            type: DataTypes.DECIMAL(10, 2),
+        nome: {
+            type: DataTypes.STRING(60),
             allowNull: false
+        },
+        nivel: {
+            type: DataTypes.STRING(30),
+            allowNull: true
+        },
+        pais: {
+            type: DataTypes.STRING(60),
+            allowNull: true
+        },
+        corPrimaria: {
+            type: DataTypes.STRING(10),
+            allowNull: true,
+            field: 'cor_primaria'
+        },
+        corSecundaria: {
+            type: DataTypes.STRING(10),
+            allowNull: true,
+            field: 'cor_secundaria'
         },
     }
 )
-
-
