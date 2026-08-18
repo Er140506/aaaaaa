@@ -1,18 +1,16 @@
-import { request, response } from "express"
-import{equipeModel,partidasModel,modalidadeModel,provaModel,seriesModel,resultadoModel} from "../model/index.js" 
+import { equipeModel, partidasModel, modalidadeModel, provaModel, seriesModel, resultadoModel } from "../model/index.js"
+import { tratarErro } from "../utils/erroHandler.js"
 
-export const ListaEquipes= async (request,response) =>{
+// GET - Lista todas as equipes
+export const ListaEquipes = async (request, response) => {
     try {
-     
         const equipe = await equipeModel.findAll()
         response.status(200).json(equipe)
     } catch (error) {
         console.log("erro ao listar equipes:", error.message)
         response.status(500).json({ mensagem: "Erro ao listar equipes" })
     }
-
 }
-
 
 // POST - Cria uma equipe e retorna o id da modalidade vinculada + um texto de confirmação
 export const CriarEquipe = async (request, response) => {
@@ -48,9 +46,8 @@ export const CriarEquipe = async (request, response) => {
             include: {
                 model: modalidadeModel,
                 as: "modalidade",
-                attributes: { 
-                    
-                    exclude: ['id', 'createdAt', 'updatedAt'] 
+                attributes: {
+                    exclude: ['id', 'createdAt', 'updatedAt']
                 }
             }
         })
@@ -114,7 +111,7 @@ export const AtualizarParcialEquipe = async (request, response) => {
 
         if (!dadosParaAtualizar || Object.keys(dadosParaAtualizar).length === 0) {
             return response.status(400).json({ msg: "Envie ao menos um campo para atualizar" })
-        }   
+        }
 
         const equipe = await equipeModel.findByPk(id)
         if (!equipe) {
@@ -124,7 +121,7 @@ export const AtualizarParcialEquipe = async (request, response) => {
         await equipe.update(dadosParaAtualizar)
 
         return response.status(200).json({
-            msg: "Equipe updated parcialmente com sucesso!",
+            msg: "Equipe atualizada parcialmente com sucesso!",
             equipe
         })
     } catch (error) {
