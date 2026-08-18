@@ -5,7 +5,7 @@
 
 import { seriesModel } from "../model/index.js"
 import { tratarErro } from "../utils/erroHandler.js"
-import { formatSerie, formatSerieList } from "../views/seriesView.js"
+import { formatSerie, formatSerieList } from "../views/seriesViews.js"
 
 // Campos que o cliente tem permissão de alterar via PATCH.
 // Evita que o usuário sobrescreva colunas internas (id, timestamps, etc).
@@ -76,4 +76,73 @@ export const AtualizarSerie = async (request, response) => {
     }
 }
 
-//
+// PATCH /series/:id - Atualiza somente os campos enviados no corpo da requisição
+export const AtualizarParcialSerie = async (request, response) => {
+    try {
+        const { id } = request.params
+        const dadosParaAtualizar = request.body
+
+        if (isNaN(id)) {
+            return response.status(400).json({ msg: "Id inválido" })
+        }
+
+        if (!dadosParaAtualizar || Object.keys(dadosParaAtualizar).length === 0) {
+            return response.status(400).json({ msg: "Envie ao menos um campo para atualizar" })
+        }
+
+        // Filtra o body para aceitar só os campos da whitelist
+        const dadosFiltrados = {}
+        for (const campo of CAMPOS_PERMITIDOS) {
+            if (dadosParaAtualizar[campo] !== undefined) {
+                dadosFiltrados[campo] = dadosParaAtualizar[campo]
+            }
+        }
+
+        if (Object.keys(dadosFiltrados).length === 0) {
+            return response.status(400).json({ msg: "Nenhum campo válido foi enviado para atualização" })
+        }
+
+        // Mesmo em PATCH, não deixa o nome ser salvo vazio caso seja enviado
+        if (dadosFiltrados.nome !== undefined && dadosFiltrados.nome.trim() === "") {
+            return response.status(400).json({ msg: "O campo 'nome' não pode ficar vazio" })
+        }
+
+        const serie = await seriesModel.findByPk(id)
+        if (!serie) {
+            return response.status(404).json({ msg: "Série não encontrada" })
+        }
+
+        await serie.update(dadosFiltrados)
+
+        return response.status(200).json({
+            msg: "Série atualizada parcialmente com sucesso!",
+            serie: formatSerie(serie)
+        })
+    } catch (error) {
+        console.error("Erro ao atualizar parcialmente série:", error.message)
+        return tratarErro(error, response)
+    }
+}
+
+// DELETE /series/:id - Remove uma série do banco
+export const DeletarSerie = async (request, response) => {
+    try {
+        const { id } = request.params
+
+        if (isNaN(id)) {
+            return response.status(400).json({ msg: "Id inválido" })
+        }
+
+        const serie = await seriesModel.findByPk(id)
+        if (!serie) {
+            return response.status(404).json({ msg: "Série não encontrada" })
+        }
+
+        await serie.destroy()
+
+        return response.status(200).json({ msg: "Série deletada com sucesso!" })
+    } catch (error) {
+        console.error("Erro ao deletar série:", error.message)
+        return tratarErro(error, response)
+    }
+}
