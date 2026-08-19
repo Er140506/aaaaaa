@@ -28,7 +28,7 @@ export const modalidadeModel = conexao.define(
             validate: {
                 // Garante que se for preenchido, não passe de 10 caracteres (bom para conter o emoji)
                 len: {
-                    args:[10],
+                    args:[0,10],
                     msg: "O campo emoji deve ter no máximo 10 caracteres."
                 }
             }

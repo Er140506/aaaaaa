@@ -64,7 +64,7 @@ export const partidasModel = conexao.define(
             allowNull: true,
             validate: {
                 isInt: { msg: "O placar do Time A deve ser um número inteiro." },
-                min: { msg: "O placar do Time A não pode ser negativo." }
+                min: { args: [0], msg: "O placar do Time A não pode ser negativo." }
             }
         },
         placarB: {
@@ -73,7 +73,8 @@ export const partidasModel = conexao.define(
             validate: {
                 isInt: { msg: "O placar do Time B deve ser um número inteiro." },
                 min: {
-                     msg: "O placar do Time B não pode ser negativo." 
+                     args: [0],
+                     msg: "O placar do Time B não pode ser negativo."
                     }
             }
         },
@@ -104,7 +105,7 @@ export const partidasModel = conexao.define(
             type: DataTypes.INTEGER,
             allowNull: true,
             validate: {
-                min: { msg: "A duração da partida deve ser de pelo menos 1 minuto." }
+                min: { args: [1], msg: "A duração da partida deve ser de pelo menos 1 minuto." }
             }
         },
         iniciadaEm: {
