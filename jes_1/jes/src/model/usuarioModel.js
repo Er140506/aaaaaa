@@ -25,16 +25,15 @@ export const usuarioModel = conexao.define(
         email: {
             type: DataTypes.STRING(160),
             allowNull: false,
-            unique: true,
             unique: {
                 msg: "Já existe um usuário cadastrado com esse e-mail"
             },
             validate: {
                 notEmpty: {
-                    msg: "o E-mail é obrigatoria"
+                    msg: "O e-mail é obrigatório"
                 },
                 isEmail: {
-                    msg: "Informe uma e-mail valido"
+                    msg: "Informe um e-mail válido"
                 }
             }
         },
@@ -43,13 +42,21 @@ export const usuarioModel = conexao.define(
             allowNull: false,
             validate: {
                 notEmpty: {
-                    msg: " a senha e obrigatoria"
+                    msg: "A senha é obrigatória"
                 },
                 len: {
                     args: [8, 100],
-                    msg: "A senha deve ter mais que 8 e nenos que 100"
+                    msg: "A senha deve ter entre 8 e 100 caracteres"
                 }
             }
+        },
+        // Todo usuário cadastrado é professor (aluno não tem conta - só acompanha os
+        // jogos pelas rotas de leitura). O campo fica salvo mesmo assim porque é ele
+        // que o middleware "permitirProfessor" usa para liberar as rotas de escrita.
+        tipo: {
+            type: DataTypes.STRING(20),
+            allowNull: false,
+            defaultValue: "professor"
         },
     }
 )

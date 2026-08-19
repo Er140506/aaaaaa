@@ -1,20 +1,21 @@
-import"./model/index.js"
-import app from "./app.js";
-import{conexao}from "./config/conexao.js"
+import "./model/index.js"
+import app from "./app.js"
+import { conexao } from "./config/conexao.js"
 
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 
-const iniciarSever = async ()=>{
+const iniciarServidor = async () => {
     try {
+        // Use { force: true } apenas em desenvolvimento: ele apaga e recria as tabelas.
         // await conexao.sync({force:true})
         await conexao.sync()
 
-        app.listen(PORT,()=>{
-            console.log("servidos iniciado na porta ",PORT)
+        app.listen(PORT, () => {
+            console.log("Servidor iniciado na porta", PORT)
         })
     } catch (error) {
-            console.log("Error ao inicar o servidor: ", error.message)
+        console.log("Erro ao iniciar o servidor:", error.message)
     }
 }
 
-await iniciarSever()
+await iniciarServidor()
